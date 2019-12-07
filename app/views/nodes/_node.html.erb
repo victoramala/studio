@@ -1,0 +1,17 @@
+<div class="well" style="margin-left:<%= node.root? ? '0px' : '50px' %>">
+  <h2><%= node.name %></h2>
+  <!-- <p class="text-muted"> <strong><%= node.node_type %></strong> on
+    <%= l(node.created_at, format: '%B, %d %Y %H:%M:%S') %></p>
+
+  <blockquote>
+    <p><%= node.description %></p>
+  </blockquote> -->
+  <% from_reply_form ||= nil %>
+  <% unless from_reply_form %>
+    <% if node.leaf? %>
+      <small class="text-muted">There are no replies yet - be the first one to reply!</small>
+    <% end %>
+    <p><%= link_to 'Edit node', edit_node_path(node.id) %></p>
+    <p><%= link_to 'Add child node', new_node_path(node.id) %></p>
+  <% end %>
+</div>
