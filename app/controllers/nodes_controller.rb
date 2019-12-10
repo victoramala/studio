@@ -1,6 +1,5 @@
 class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
-
   # GET /nodes
   # GET /nodes.json
   def index
@@ -20,7 +19,22 @@ class NodesController < ApplicationController
   # end
 
   def new
-    @node = Node.new(parent_id: params[:parent_id])
+    if params[:parent_id]
+      @parent_node = Node.find(params[:parent_id])
+      @parent_node_type = @parent_node.node_type
+      if @parent_node_type == 'series'
+        @node_type = 'episodes'
+      elsif @parent_node_type == 'episodes'
+        @node_type = 'episode'
+      elsif @parent_node_type == 'episode'
+        @node_type = 'category'
+      elsif @parent_node_type == 'category'
+        @node_type = 'task'
+      else
+        @node_type = ''
+      end
+    end
+    @node = Node.new(parent_id: params[:parent_id], node_type: @node_type)
   end
 
   # GET /nodes/1/edit

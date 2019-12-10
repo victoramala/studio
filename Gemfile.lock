@@ -58,6 +58,9 @@ GEM
       zeitwerk (~> 2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    attribute_choices (1.0.2)
+      activerecord
+      activesupport
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
@@ -205,6 +208,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attribute_choices
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)

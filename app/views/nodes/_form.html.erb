@@ -16,21 +16,24 @@
     <%= form.text_field :name %>
     <%= form.hidden_field :parent_id %>
   </div>
-
-  <div class="field">
-    <%= form.label :node_type %>
-    <%= form.text_field :node_type %>
-  </div>
-
+ <%unless params[:parent_id]%>
+    <div class="field">
+      <%= form.label :type %>
+      <%= form.select :node_type, collection: [["Series", 'series'], ["Film", 'film']] %>
+    </div>
+ <%else%>
+    <%= form.hidden_field :node_type%>
+ <%end%>
   <div class="field">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
 
-  <div class="field">
+  <!-- <div class="field">
     <%= form.label :state %>
     <%= form.text_field :state %>
-  </div>
+  </div> -->
+  <%= form.hidden_field :state,  value: 'a'%>
 
   <div class="actions">
     <%= form.submit %>

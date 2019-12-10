@@ -1,4 +1,8 @@
-<h1>New Node</h1>
+<% if @node.parent and @node.parent.root %>
+  <h1><%= @node.parent.root.name%></h1>
+<% else%>
+  <h1>New Project</h1>
+<%end%>
 
 <% if @node.parent %>
   <%= render 'node', node: @node.parent, from_reply_form: true %>

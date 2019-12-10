@@ -1,5 +1,5 @@
-<div class="well" style="margin-left:<%= node.root? ? '0px' : '50px' %>">
-  <h2><%= node.name %></h2>
+<div class="well" style="">
+  <h5><%= node.name %></h5>
   <!-- <p class="text-muted"> <strong><%= node.node_type %></strong> on
     <%= l(node.created_at, format: '%B, %d %Y %H:%M:%S') %></p>
 
@@ -8,10 +8,23 @@
   </blockquote> -->
   <% from_reply_form ||= nil %>
   <% unless from_reply_form %>
-    <% if node.leaf? %>
-      <small class="text-muted">There are no replies yet - be the first one to reply!</small>
+    <!-- <% if node.leaf? %>
+      <p><%= link_to node.node_type_display, new_node_path(node.id) %></p>
+    <% end %> -->
+    <!-- <p><%= link_to 'Edit node', edit_node_path(node.id) %></p> -->
+    <% unless node.node_type.blank? %>
+      <% if node.node_type == 'series' %>
+        <p><%= link_to 'Add Episodes', new_node_path(node.id) %></p>
+      <% elsif node.node_type == 'episodes' %>
+        <p><%= link_to 'Add Episode', new_node_path(node.id) %></p>
+      <% elsif node.node_type == 'episode' %>
+        <p><%= link_to 'Add Category', new_node_path(node.id) %></p>
+      <% elsif node.node_type == 'category' %>
+        <p><%= link_to 'Add Task', new_node_path(node.id) %></p>
+      <%end%>
+    <% else %>
+      <p><%= link_to 'Add Child', new_node_path(node.id) %></p>
     <% end %>
-    <p><%= link_to 'Edit node', edit_node_path(node.id) %></p>
-    <p><%= link_to 'Add child node', new_node_path(node.id) %></p>
+      <!-- <p><%= link_to node.node_type_display, new_node_path(node.id) %></p> -->
   <% end %>
 </div>
