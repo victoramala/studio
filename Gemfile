@@ -9,6 +9,14 @@ gem 'rails', '~> 6.0.1'
 # gem 'sqlite3', '~> 1.4'
 gem 'pg'
 
+gem 'simple_form'
+
+gem 'slim-rails'
+
+# gem "nested_form"
+
+gem 'devise'
+
 gem 'attribute_choices'
 
 gem 'closure_tree'

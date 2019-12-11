@@ -1,0 +1,46 @@
+.row
+  .col-md-12
+   .row
+    .col-md-4
+      p#notice= notice
+      p
+        strong Name:
+        = @node.name
+      p
+        strong Node type:
+        = @node.node_type
+      p
+        strong Description:
+        = @node.description
+      p
+        strong State:
+        = @node.state
+      = link_to 'Edit', edit_node_path(@node)
+      | \
+      = link_to 'Back', nodes_path
+    .col-md-6
+      - @node.assignments.each do |assignment|
+        .card style=("width: 18rem;")
+        .card-body
+          h5.card-title
+            span
+              ' Assigned To :
+              '
+              = assignment.user.name
+          h5.card-title
+            span
+              ' Task Status :
+              '
+              = assignment.status_display
+          h6.card-subtitle.mb-2.text-muted
+            span
+              ' Completition Date :
+              '
+              = assignment.completition_date.strftime("%d-%m-%Y")
+          p.card-text
+            span
+              ' Comments :
+              '
+              = assignment.description
+          /a.card-link href="#"  Card link
+          /a.card-link href="#"  Another link

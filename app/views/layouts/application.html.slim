@@ -1,0 +1,32 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>HummingliveStudio</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'jsgantt' %>
+
+  </head>
+
+  <body>
+
+    <%= yield %>
+  </body>
+</html> -->
+
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title HummingliveStudio
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'jsgantt'
+  body
+    = render 'layouts/header'
+    = yield

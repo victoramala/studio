@@ -1,0 +1,29 @@
+.well style=""
+  h5= link_to node.name, node_path(node)
+  /!
+    | <p class="text-muted"> <strong><haml_loud> node.node_type </haml_loud></strong> on
+    | <haml_loud> l(node.created_at, format: &#39;%B, %d %Y %H:%M:%S&#39;) </haml_loud></p
+
+    | <blockquote
+    | <p><haml_loud> node.description </haml_loud></p
+    | </blockquote
+  - from_reply_form ||= nil
+  - unless from_reply_form
+    /! <p><haml_loud> link_to &#39;Edit node&#39;, edit_node_path(node.id) </haml_loud></p
+    - unless node.node_type.blank?
+      - if node.node_type == 'series'
+        p = link_to 'Add Episodes', new_node_path(node.id)
+      - elsif node.node_type == 'episodes'
+        p = link_to 'Add Episode', new_node_path(node.id)
+      - elsif node.node_type == 'episode'
+        p = link_to 'Add Category', new_node_path(node.id)
+      - elsif node.node_type == 'category'
+        p = link_to 'Add Task', new_node_path(node.id)
+    - else
+      p = link_to 'Add Child', new_node_path(node.id)
+    - if node.node_type == 'task'
+      p = link_to 'Assign User', new_node_assignment_path(node_id:node)
+      - if node.assignments
+        p
+          = node.assignments.count
+          |  Assignemnts

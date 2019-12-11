@@ -1,0 +1,15 @@
+= simple_form_for(@assignment) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :status, collection: Assignment.status_choices
+    = f.input :start_date
+    = f.input :end_date
+    = f.input :completition_date
+    = f.input :description
+    = f.association :node
+    = f.association :user, collection: User.all.order(:name)
+
+  .form-actions
+    = f.button :submit

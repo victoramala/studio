@@ -1,0 +1,27 @@
+p#notice = notice
+
+p
+  strong Status:
+  = @assignment.status
+p
+  strong Start date:
+  = @assignment.start_date
+p
+  strong End date:
+  = @assignment.end_date
+p
+  strong Completition date:
+  = @assignment.completition_date
+p
+  strong Description:
+  = @assignment.description
+p
+  strong Node:
+  = @assignment.node
+p
+  strong User:
+  = @assignment.user
+
+=> link_to 'Edit', edit_assignment_path(@assignment)
+'|
+=< link_to 'Back', assignments_path
