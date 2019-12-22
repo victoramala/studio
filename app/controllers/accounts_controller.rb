@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_account, only: [:show, :edit, :update, :destroy ]
 
   # GET /accounts
   # GET /accounts.json
@@ -31,7 +31,7 @@ class AccountsController < ApplicationController
       if @account.save
         @user = @account.users.last
         sign_in(@user)
-        format.html { redirect_to after_sign_in_path_for(@account.user), notice: 'Account was successfully created.' }
+        format.html { redirect_to after_sign_in_path_for(@user), notice: 'Account was successfully created.' }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new }
@@ -54,6 +54,10 @@ class AccountsController < ApplicationController
     end
   end
 
+  def my_workspace
+    @account = Account.find(params[:account_id])
+    @nodes = @account.nodes
+  end
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy

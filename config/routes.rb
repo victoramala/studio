@@ -6,7 +6,12 @@ Rails.application.routes.draw do
   unauthenticated do
     root to: "home#index"
   end
-  resources :nodes, only: [:index, :create, :edit, :show] do
+  resources :dashboard
+  resources :accounts do
+    get 'my_workspace'
+  end
+  resources :users
+  resources :nodes, only: [:index, :create, :edit] do
     resources :assignments
   end
   resources :assignments

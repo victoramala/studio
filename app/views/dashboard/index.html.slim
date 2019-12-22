@@ -1,1 +1,9 @@
-.container
+.container(style="margin-top:80px")
+  div.panel.panel-default(style="width:50%";padding:10px;)
+    div(style="padding:20px;")
+			h3 Accounts list
+			hr
+			- @accounts.each do |a|
+			  = link_to account_path(a)
+					= a.name
+					hr
