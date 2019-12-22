@@ -11,8 +11,11 @@ div(style="margin-top:100px;")
     p
       strong Address:
       = @account.address
-
-    = link_to "+ Add Users", new_user_path(account_id: @account)
+    .row
+      .col-md-2
+        = link_to "+ Add Users", new_user_path(account_id: @account)
+      .col-md-2
+        = link_to "My workspace", account_my_workspace_path(@account) 
     .container(style="margin-top:10px")
       div.panel.panel-default(style="width:70%";padding:10px;)
         div(style="padding:20px;")
@@ -22,7 +25,7 @@ div(style="margin-top:100px;")
             = link_to user_path(user)
               = user.name
               hr
-    = link_to "My workspace", account_my_workspace_path(@account) 
+    
 
 => link_to 'Edit', edit_account_path(@account)
 '|

@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   unauthenticated do
     root to: "home#index"
   end
-  resources :dashboard
+  resources :dashboard do
+    get 'account', on: :collection
+    post 'create_account', on: :collection
+  end
   resources :accounts do
     get 'my_workspace'
   end

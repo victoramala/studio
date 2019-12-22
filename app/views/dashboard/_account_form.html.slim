@@ -1,0 +1,28 @@
+= simple_nested_form_for(@user, url: create_account_dashboard_index_path, html: {class: 'm-t'}) do |f|
+  - if f.object.id?
+    = f.simple_fields_for :accounts do |account|
+      .form-group
+        = account.input :name, label: false, placeholder: 'Company Name ', input_html: {class: "form-control"}
+      /.form-group
+        = f.input :company, label: false, placeholder: ' Company Name ', input_html: {class: "form-control"}
+      .form-group
+        = account.input :phone, label: false, placeholder: ' Mobile ', input_html: {class: "form-control"}
+    /- else
+      .form-group
+        = f.input :name, label: false, placeholder: ' Name ', input_html: {class: "form-control"}
+      /.form-group
+        = f.input :company, label: false, placeholder: ' Company Name ', input_html: {class: "form-control"}
+      .form-group
+        = f.input :phone, label: false, placeholder: ' Mobile ', input_html: {class: "form-control"}
+      = f.simple_fields_for :users do |u|
+        .form-group
+          = u.input :name, label: false, required: true, autofocus: true, placeholder: "User Name ", input_html: {class: "form-control"}
+        .form-group
+          = u.input :email, label: false, required: true, autofocus: true, placeholder: " Email ", input_html: {class: "form-control"}
+        .form-group
+          = u.input :password, label: false, required: true, placeholder: " Password ", input_html: {class: "form-control"}
+        .form-group
+          = u.input :password_confirmation, label: false, required: true, placeholder: " Confirm Password ", input_html: {class: "form-control"}
+        /hr
+    = f.submit ' Add Account ', class: "btn btn-primary block full-width m-b"
+      /p.text-muted.text-center
