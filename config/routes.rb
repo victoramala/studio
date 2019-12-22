@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'nodes#index'
+  authenticated :user do
+    root to: "dashboard#index", as: :authenticated_root
+  end
+  unauthenticated do
+    root to: "home#index"
+  end
   resources :nodes, only: [:index, :create, :edit, :show] do
     resources :assignments
   end

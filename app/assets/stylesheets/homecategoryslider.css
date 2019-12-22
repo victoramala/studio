@@ -1,0 +1,133 @@
+
+.hl-advisory-panel {
+    position: relative;
+	margin-bottom:0px
+}
+.hl-advisory-panel .group-btn-slider .btn-prev {
+    top: 50%;
+}
+.hl-advisory-panel .group-btn-slider .btn-next {
+    top: 50%;
+}
+.advisory-item {
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding:0px;
+    position: relative;
+    transition: all 0.8s ease 0s;
+}
+.advisory-item:hover {
+    background-color: #fff;
+}
+.hl-expert-panel {
+    position: relative;
+	margin-bottom:0px
+}
+.hl-expert-panel .group-btn-slider .btn-prev {
+    top: 50%;
+}
+.hl-expert-panel .group-btn-slider .btn-next {
+    top: 50%;
+}
+.expert-item {
+    background-color: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    padding:0px;
+    position: relative;
+    transition: all 0.8s ease 0s;
+}
+.expert-item:hover {
+    background-color: #fff;
+}
+.group-btn-slider .btn-prev, .group-btn-slider .btn-next {
+    border: 2px solid;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 40px;
+    height: 60px;
+    line-height: 53px;
+    margin-top: -25px;
+    opacity: 0.3;
+    padding: 0;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transition: all 0.3s linear 0s;
+    width: 60px;
+    z-index: 10;	
+}
+.group-btn-slider .btn-prev:hover, .group-btn-slider .btn-next:hover {
+    opacity: 1;
+	color:#ee7b48;
+}
+.group-btn-slider .btn-prev {
+    left: -7%;
+}
+.group-btn-slider .btn-next {
+    right: -7%;
+}
+@media screen and (max-width: 768px) {
+.hl-expert-panel {
+	margin-bottom:35px
+}
+.hl-advisory-panel {
+	margin-bottom:35px
+}
+.group-btn-slider .btn-prev, .group-btn-slider .btn-next {
+    bottom: 20px;
+    height: 40px;
+	font-size: 24px;
+    line-height: 32px;
+    top: auto;
+    width: 40px;
+}
+.group-btn-slider .btn-prev {
+    left: 50%;
+    margin-left: -50px;
+}
+.group-btn-slider .btn-next {
+    margin-right: -50px;
+    right: 50%;
+}
+
+.hl-expert-panel .group-btn-slider {
+    position: relative;
+    top: 80px;
+}
+.hl-expert-panel .group-btn-slider .btn-prev, .hl-expert-panel .group-btn-slider .btn-next {
+    bottom: 20px;
+    height: 40px;
+    line-height: 32px;
+    top: auto;
+    width: 40px;
+}
+.hl-expert-panel .group-btn-slider .btn-prev {
+    left: 50%;
+    margin-left: -50px;
+}
+.hl-expert-panel .group-btn-slider .btn-next {
+    margin-right: -50px;
+    right: 50%;
+}
+
+.hl-advisory-panel .group-btn-slider {
+    position: relative;
+    top: 80px;
+}
+.hl-advisory-panel .group-btn-slider .btn-prev, .hl-advisory-panel .group-btn-slider .btn-next {
+    bottom: 20px;
+    height: 40px;
+    line-height: 32px;
+    top: auto;
+    width: 40px;
+}
+.hl-advisory-panel .group-btn-slider .btn-prev {
+    left: 50%;
+    margin-left: -50px;
+}
+.hl-advisory-panel .group-btn-slider .btn-next {
+    margin-right: -50px;
+    right: 50%;
+}
