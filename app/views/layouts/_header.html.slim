@@ -16,11 +16,15 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
       ul.nav.navbar-nav.navbar-right
        - if current_user
           li
-            = link_to "My Account", account_path(current_user.accounts   .first)
+            = link_to "My Account", account_path(current_user.accounts.first)
           li
-            = link_to "+ Node", new_node_path
+            = link_to "Manage Projects", account_my_workspace_path(current_user.accounts.first)
+          li
+            = link_to "My Tasks", assignments_path
+          li
+            = link_to "+ New project", new_node_path
             /a href="dashboard/my_workspace" style="" My Workspace
-          li
+          /li
             a href="/" style=""  My Tasks
           li = link_to " Sign Out ", destroy_user_session_path, method: :delete,  class: 'main-menu' , style: "color:#e9573f"
        - else

@@ -1,0 +1,31 @@
+= form_with(model: node, local: true) do |form|
+  - if node.errors.any?
+    #error_explanation
+      h2
+        = pluralize(node.errors.count, "error")
+        | prohibited this node from being saved:
+      ul
+        - node.errors.full_messages.each do |message|
+          li= message
+  .field
+    = form.label :name
+    = form.text_field :name
+    = form.hidden_field :parent_id
+  - unless params[:parent_id]
+    .field
+      = form.label :type
+      = form.select :node_type, collection: [["Series", 'series'], ["Film", 'film']]
+  - else
+    = form.hidden_field :node_type
+  .field
+    = form.label :description
+    = form.text_area :description
+  /!
+    | <div class="field"
+    | <haml_loud> form.label :state </haml_loud
+    | <haml_loud> form.text_field :state </haml_loud
+    | </div
+  = form.hidden_field :state,  value: 'a'
+  = form.hidden_field :account_id, value: current_user.accounts.last.id
+  .actions
+    = form.submit

@@ -1,9 +1,10 @@
 class NodesController < ApplicationController
   before_action :set_node, only: [:show, :edit, :update, :destroy]
+  before_action :set_account, only: [:index]
   # GET /nodes
   # GET /nodes.json
   def index
-    @nodes = Node.hash_tree
+    @nodes = @account.nodes.hash_tree
     # puts @nodes.to_json
     # render :json => @nodes
   end
@@ -54,8 +55,13 @@ class NodesController < ApplicationController
 
     respond_to do |format|
       if @node.save
-        format.html { redirect_to nodes_path, notice: 'Node was successfully created.' }
-        format.json { render :show, status: :created, location: @node }
+        if @node.node_type == 'series'
+          format.html { redirect_to account_my_workspace_path(@node.account), notice: 'Node was successfully created.' }
+          format.json { render :show, status: :created, location: @node }
+        else
+          format.html { redirect_to nodes_path, notice: 'Node was successfully created.' }
+          format.json { render :show, status: :created, location: @node }
+        end
       else
         format.html { render :new }
         format.json { render json: @node.errors, status: :unprocessable_entity }
@@ -93,6 +99,11 @@ class NodesController < ApplicationController
       @node = Node.find(params[:id])
     end
 
+    def set_account
+      if current_user
+        @account= current_user.accounts.last
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def node_params
       params.require(:node).permit!
