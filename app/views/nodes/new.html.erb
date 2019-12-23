@@ -1,12 +1,14 @@
-<% if @node.parent and @node.parent.root %>
-  <h1><%= @node.parent.root.name%></h1>
-<% else%>
-  <h1>New Project</h1>
-<%end%>
+<div class="container">
+  <% if @node.parent and @node.parent.root %>
+    <h1><%= @node.parent.root.name%></h1>
+  <% else%>
+    <h1>New Project</h1>
+  <%end%>
 
-<% if @node.parent %>
-  <%= render 'node', node: @node.parent, from_reply_form: true %>
-<% end %>
-<%= render 'form', node: @node %>
+  <% if @node.parent %>
+    <%= render 'node', node: @node.parent, from_reply_form: true %>
+  <% end %>
+  <%= render 'form'%>
 
-<%= link_to 'Back', nodes_path %>
+  <%= link_to 'Back', nodes_path %>
+</div>

@@ -29,5 +29,6 @@ html
     = javascript_pack_tag 'jsgantt'
   body
     = render 'layouts/header'
-    div(style="margin-top:100px")
-    = yield
+    .container
+      div(style="margin-top:100px")
+      = yield

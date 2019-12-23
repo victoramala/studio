@@ -1,0 +1,16 @@
+= simple_form_for(@node,  html: {class: 'm-t'}) do |f|
+  .form-group
+    = f.input :name, input_html: {class: "form-control"}
+    = f.input :parent_id ,  :as => :hidden
+  .form-group
+    - unless params[:parent_id]
+        = f.input :node_type ,  collection: [["Series", 'series'], ["Film", 'film']], input_html: {class: "form-control"}
+    - else
+      = f.input :node_type,:as => :hidden
+  .form-group
+    = f.input :description, input_html: {class: "form-control"}
+    = f.input :state, input_html: { value: 'a' },  :as => :hidden
+    = f.input :account_id, input_html: { value: current_user.accounts.last.id },  :as => :hidden
+
+  .form-actions
+    = f.button :submit
