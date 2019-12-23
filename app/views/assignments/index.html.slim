@@ -1,6 +1,54 @@
-h1 Listing assignments
+.container
+  div.panel.panel-default(style="padding:30px;")
+    .row
+      .col-md-2
+        strong Task
+      .col-md-2
+        strong Project
+      .col-md-2
+        strong Status
+      .col-md-2
+        strong User
+      .col-md-2
+        strong Start
+      .col-md-2
+        strong End
+    hr
+    - @assignments.each do |assignment|
+      .row
+        .col-md-2
+          = assignment.node.name
+        .col-md-2
+          = assignment.node.root.name
+        .col-md-2
+          = assignment.status_display
+        .col-md-2
+          = assignment.user.name
+        .col-md-2
+          = assignment.start_date
+        .col-md-2
+          = assignment.end_date
+      hr
 
-table
+
+
+
+/.col-md-2
+                    = link_to assignment_path(a)
+                      = a.node.name
+                  .col-md-2
+                    = a.node.root.name
+                  .col-md-2
+                    = a.status_display
+                  .col-md-2
+                    = a.user.name
+                  .col-md-2
+                    = a.start_date
+                  .col-md-2
+                    = a.end_date
+
+
+/table
   thead
     tr
       th Status
@@ -30,4 +78,4 @@ table
 
 br
 
-= link_to 'New Assignment', new_assignment_path
+/= link_to 'New Assignment', new_assignment_path

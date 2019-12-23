@@ -1,28 +1,39 @@
 .container(style="margin-top:100px;")
-  p#notice = notice
-
-  p
-    strong Status:
-    = @assignment.status_display
-  p
-    strong Start date:
-    = @assignment.start_date
-  p
-    strong End date:
-    = @assignment.end_date
-  p
-    strong Completition date:
-    = @assignment.completition_date
-  p
-    strong Description:
-    = @assignment.description
-  p
-    strong Node:
-    = @assignment.node.name
-  p
-    strong User:
-    = @assignment.user.name
-
-  => link_to 'Edit', edit_assignment_path(@assignment)
-  '|
-  =< link_to 'Back', assignments_path
+  div.panel.panel-default(style="padding:10px;")
+    .row
+      .col-md-6
+        p#notice = notice
+        p
+          strong Assigned To:
+          = @assignment.user.name
+        p
+          strong Task:
+          = @assignment.node.name
+        p
+          strong Project:
+          = @assignment.node.root.name
+        p
+          strong Status:
+          = @assignment.status_display
+        p
+          strong Start date:
+          = @assignment.start_date
+        p
+          strong End date:
+          = @assignment.end_date
+        p
+          strong Completition date:
+          = @assignment.completition_date
+        p
+          strong Description:
+          = @assignment.description
+      .col-md-6
+        - if @assignment.status != "a"
+          .row
+              = link_to "Approve", assignment_task_review_path(@assignment, status: "approve"), class: "btn btn-default", style: "background-color: green;color:#fff"
+              /=> link_to 'Edit', edit_assignment_path(@assignment)
+              /'|
+          .row
+               = link_to "Review", assignment_task_review_path(@assignment, status: "revision"), class: "btn btn-default", style: "background-color: orange;color:#fff"
+  .col-md-1
+      = link_to 'Back', node_path(@assignment.node.root.id), class: "btn btn-default"

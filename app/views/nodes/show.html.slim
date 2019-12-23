@@ -50,32 +50,41 @@
         - if @node_tree
           = nodes_tree_for @node_tree
       .col-md-6
-        - @nodes_list = @node.leaves.where("node_type=?", "task").includes(:assignments)
-        
-        /= assignments.first.status
-        - @nodes_list.each do |node|
-          - if node.assignments
-            - node.assignments.each do |assignment|
-              - if assignment
-                  .card style=("width: 18rem;")
-                  .card-body
-                    h5.card-title
-                      span
-                        ' Assigned To :
-                        '
-                        = assignment.user.name if assignment
-                    h5.card-title
-                      span
-                        ' Task Status :
-                        '
-                        = assignment.status_display
-                    h6.card-subtitle.mb-2.text-muted
-                      span
-                        ' Completition Date :
-                        '
-                        = assignment.completition_date.strftime("%d-%m-%Y")
-                    p.card-text
-                      span
-                        ' Comments :
-                        '
-                        = assignment.description
+          h4 Assignments
+          - @nodes_list = @node.leaves.where("node_type=?", "task").includes(:assignments)
+          
+          /= assignments.first.status
+          - @nodes_list.each do |node|
+            - if node.assignments
+              - node.assignments.each do |assignment|
+                - if assignment
+                  = link_to assignment_path(assignment)
+                    div.panel.panel-default(style="padding:30px;")
+                      .card style=("width: 18rem;")
+                      .card-body
+                        .row
+                          .col-md-6
+                            h5.card-title
+                              span
+                                strong Assigned To :  
+                                = assignment.user.name if assignment
+                            h5.card-title
+                              span
+                                strong Task Status :
+                                '
+                                = assignment.status_display
+                            h6.card-subtitle.mb-2
+                              span
+                                strong Deadline :  
+                                '
+                                = assignment.completition_date.strftime("%d-%m-%Y")
+                            h6.card-subtitle.mb-2
+                              span
+                                strong Comments :
+                                '
+                                = assignment.description
+                          .col-md-6
+                             h5.card-title
+                              span
+                                strong Task :  
+                                = assignment.node.name

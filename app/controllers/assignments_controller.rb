@@ -7,7 +7,16 @@ class AssignmentsController < ApplicationController
   def index
     @assignments = Assignment.all
   end
-
+  
+  def task_review
+    @assignment = Assignment.find(params[:assignment_id])
+    if params[:status]=="approve"
+      @assignment.update_attributes(status: "a")
+    elsif params[:status]=="revision"
+      @assignment.update_attributes(status: "r")
+    end
+    redirect_to node_path(@assignment.node.root.id)
+  end
   # GET /assignments/1
   # GET /assignments/1.json
   def show
@@ -29,7 +38,7 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
       if @assignment.save
-        format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        format.html { redirect_to node_path(@assignment.node.root.id), notice: 'Assignment was successfully created.' }
         format.json { render :show, status: :created, location: @assignment }
       else
         format.html { render :new }

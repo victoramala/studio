@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   resources :nodes, only: [:index, :create, :edit, :show] do
     resources :assignments
   end
-  resources :assignments
+  resources :assignments do
+    get "task_review"
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
