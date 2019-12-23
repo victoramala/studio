@@ -1,0 +1,77 @@
+/div(style="margin-top:100px")
+  div.panel.panel-default(style="margin-left:30px;width:95%;padding:10px;")
+    - @nodes.each do |node|
+        .row
+          .col-md-12
+            .cp-wrapper
+              ul.cp-section-list
+                li.cp-card-outer
+                  /a href="#" 
+                  .cp-card
+                    .cp-card-preview-image-outer
+                      /img.img-responsive.center-block alt="" src="images/solution-videos-images/entertainment-fiction.jpg" /
+                      img.img-responsive.center-block alt=("post thumb image") src="/assets/entertainment-fiction.jpg" 
+                    .cp-card-details
+                        .cp-card-text(style="overflow: unset !important")
+                          h4.cp-card-title = @nodes.root.name
+                          /! <h5 class="cp-card-sub-title">New entity</h5
+                          ul
+                            li Feature development
+                            li Music Videos
+                            li Branded entertainment
+                          /! <p class="cp-card-description">Showcasing technology, market focus and application</p
+                        /!
+                          | <div class="cp-card-context"
+                          | <div class="cp-card-context-label"><span>Cost Range: &amp;#8377; 60,000 - &amp;#8377 90,000</span></div
+                          | </div
+
+div(style="margin-top:100px")
+div.panel.panel-default(style="margin-left:30px;width:95%;padding:5px;")
+  section#create-a-post.sce-content.create-a-post
+    .container
+      .row
+        .col-md-12
+          /p.tagline
+            span Relevant for:
+            | Creative Studios, Brand custodians, Entertainment and Experiences.
+          /p.tagline Our deep understanding of skills and capabilities enables efficient building of modular blocks of solutions
+          h2 WorkSpace
+      .row
+        .col-md-12
+          .cp-wrapper
+            ul.cp-section-list
+              - @nodes.each do |node|
+                li.cp-card-outer
+                  .cp-card
+                    .cp-card-preview-image-outer
+                      img.img-responsive.center-block alt=("post thumb image") src="/assets/entertainment-fiction.jpg" /
+                    .cp-card-details
+                      .cp-card-text style=("overflow: set !important") 
+                        = link_to nodes_path
+                          h4.cp-card-title = node.root.name
+                        /! <h5 class="cp-card-sub-title">New entity</h5
+                        = node.root.description
+                        /! <p class="cp-card-description">Showcasing technology, market focus and application</p
+                      /!
+                        | | <div class="cp-card-context"
+                        | | <div class="cp-card-context-label"><span>Cost Range: &amp;#8377; 60,000 - &amp;#8377 90,000</span></div
+                        | | </div     
+.row
+  .col-md-12
+    .create-post-btn style=("margin-top:0px !important") 
+      .cp-button.Create-a-Post data-target="/app/nodes/new" 
+        .cp-effect
+        a href="/nodes/new" style=("font-size:14px;font-weight:1000 !important")  Create Project
+/.row
+  .col-md-8
+    .hl-experts
+      ul.list.img-list
+        li
+          .inner
+            .li-img
+              img.img-circle alt=("Anil Arjun") src="/assets/anil_arjun.jpg" /
+            .li-text
+              h4 SOLUTION EXPERT
+              p
+                a href="/about?expert=anil" > Anil Arjun
+                | is actively connected with the Entertainment industry.

@@ -1,14 +1,35 @@
-p#notice = notice
+div(style="margin-top:100px;")
+  div.panel.panel-default(style="width:90%;padding:10px;margin-left:10px;")
+    p#notice = notice
 
-p
-  strong Name:
-  = @account.name
-p
-  strong Phone:
-  = @account.phone
-p
-  strong Address:
-  = @account.address
+    p
+      strong Company:
+      = @account.name
+    p
+      strong Phone:
+      = @account.phone
+    p
+      strong Address:
+      = @account.address
+    .row
+      .col-md-2
+        = link_to "+ Add Users", new_user_path(account_id: @account)
+      .col-md-2
+        = link_to "My workspace", account_my_workspace_path(@account) 
+    .container(style="margin-top:10px")
+      div.panel.panel-default(style="width:70%";padding:10px;)
+        div(style="padding:20px;")
+          h3 Users list
+          hr
+          - @account.users.each do |user|
+            .row
+              .col-md-3
+                = link_to user_path(user)
+                  = user.name
+              .col-md-3
+                = user.user_role_display
+            hr
+    
 
 => link_to 'Edit', edit_account_path(@account)
 '|

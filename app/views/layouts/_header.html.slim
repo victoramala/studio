@@ -16,9 +16,12 @@ nav.navbar.navbar-default.navbar-fixed-top role="navigation"
       ul.nav.navbar-nav.navbar-right
        - if current_user
           li
-            a href="/iam-creative" style="" My Workspace
+            = link_to "My Account", account_path(current_user.accounts   .first)
           li
-            a href="/creatives" style=""  My Tasks
+            = link_to "+ Node", new_node_path
+            /a href="dashboard/my_workspace" style="" My Workspace
+          li
+            a href="/" style=""  My Tasks
           li = link_to " Sign Out ", destroy_user_session_path, method: :delete,  class: 'main-menu' , style: "color:#e9573f"
        - else
           li

@@ -1,1 +1,69 @@
-.container
+.container(style="margin-top:80px")
+  .row
+    .col-md-4
+      div.panel.panel-default(style="width:100%";padding:5px;)
+        div(style="padding:20px;")
+          .row
+            .col-md-6
+              h4 Projects list
+            /.col-md-5
+              H3 = link_to "+ New Account", new_user_path
+          hr
+          - @account.nodes.where("parent_id IS ?", nil).each do |node|
+            = link_to node_path(node)
+              = node.root.name
+              hr
+    .col-md-8
+      div.panel.panel-default(style="width:100%";padding:10px;)
+        div(style="padding:20px;")
+          .row
+            .col-md-6
+              h4 My Tasks list
+            /.col-md-5
+              H3 = link_to "+ New Account", new_user_path
+          hr
+          - @assignments.each do |a|
+            - unless a.nil?
+              .row
+                .col-md-3
+                  = link_to assignment_path(a)
+                    = a.node.name
+                /.col-md-1
+                  = a.status_display
+                .col-md-2
+                  = a.user.name
+                .col-md-3
+                  = a.start_date
+                .col-md-3
+                  = a.end_date
+              hr
+  if current_user.role == "admin"
+    .row
+      .col-md-12
+        div.panel.panel-default(style="width:100%";padding:10px;)
+          div(style="padding:20px;")
+            .row
+              .col-md-6
+                h3 All Tasks list
+              /.col-md-5
+                H3 = link_to "+ New Account", new_user_path
+            hr
+            - @all_assigns.each do |a|
+              - unless a.nil?
+                .row
+                  .col-md-2
+                    = link_to assignment_path(a)
+                      = a.node.name
+                  .col-md-2
+                    = a.node.root.name
+                  .col-md-2
+                    = a.status_display
+                  .col-md-2
+                    = a.user.name
+                  .col-md-2
+                    = a.start_date
+                  .col-md-2
+                    = a.end_date
+                hr      
+            
+         

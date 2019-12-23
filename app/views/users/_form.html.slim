@@ -1,0 +1,17 @@
+div.panel.panel-default(style="margin-top:100px;margin-left:30px;width:40%;padding:10px;")
+  = simple_nested_form_for(@account, html: {class: 'm-t'}) do |f|
+    = f.simple_fields_for :users do |u|
+      - if u.object.id.nil?
+        .form-group
+          = u.input :name, label: false, required: true, autofocus: true, placeholder: " Name ", input_html: {class: "form-control"}
+        .form-group
+          = u.input :email, label: false, required: true, autofocus: true, placeholder: " Email ", input_html: {class: "form-control"}
+        .form-group
+          = u.input :user_role, collection: User.user_role_choices, label: false, required: true, autofocus: true, placeholder: " Email ", input_html: {class: "form-control"}
+        .form-group
+          = u.input :password, label: false, required: true, placeholder: " Password ", input_html: {class: "form-control"}
+        /.form-group
+          = u.input :password_confirmation, label: false, required: true, placeholder: " Confirm Password ", input_html: {class: "form-control"}
+        /hr
+    = f.submit ' Add User ', class: "btn btn-primary block full-width m-b"
+      /p.text-muted.text-center
