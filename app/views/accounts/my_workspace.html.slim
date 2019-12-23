@@ -38,16 +38,17 @@ div.panel.panel-default(style="margin-left:30px;width:95%;padding:5px;")
           h2 WorkSpace
       .row
         .col-md-12
-          - @nodes.each do |node|
-            .cp-wrapper
-              ul.cp-section-list
+          .cp-wrapper
+            ul.cp-section-list
+              - @nodes.each do |node|
                 li.cp-card-outer
                   .cp-card
                     .cp-card-preview-image-outer
                       img.img-responsive.center-block alt=("post thumb image") src="/assets/entertainment-fiction.jpg" /
                     .cp-card-details
                       .cp-card-text style=("overflow: set !important") 
-                        h4.cp-card-title = node.root.name
+                        = link_to nodes_path
+                          h4.cp-card-title = node.root.name
                         /! <h5 class="cp-card-sub-title">New entity</h5
                         = node.root.description
                         /! <p class="cp-card-description">Showcasing technology, market focus and application</p

@@ -34,7 +34,7 @@
     <%= form.text_field :state %>
   </div> -->
   <%= form.hidden_field :state,  value: 'a'%>
-
+  <%= form.hidden_field :account_id, value: current_user.accounts.last.id %>
   <div class="actions">
     <%= form.submit %>
   </div>

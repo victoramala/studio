@@ -1,5 +1,5 @@
 .well style=""
-  h5= link_to node.name, node_path(node)
+  h5= link_to node.name, nodes_path(node)
   /!
     | <p class="text-muted"> <strong><haml_loud> node.node_type </haml_loud></strong> on
     | <haml_loud> l(node.created_at, format: &#39;%B, %d %Y %H:%M:%S&#39;) </haml_loud></p

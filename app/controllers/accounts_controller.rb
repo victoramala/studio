@@ -56,7 +56,7 @@ class AccountsController < ApplicationController
 
   def my_workspace
     @account = Account.find(params[:account_id])
-    @nodes = @account.nodes
+    @nodes = @account.nodes.where("parent_id IS ?", nil)
   end
   # DELETE /accounts/1
   # DELETE /accounts/1.json
