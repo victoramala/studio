@@ -11,6 +11,7 @@ class NodesController < ApplicationController
   # GET /nodes/1
   # GET /nodes/1.json
   def show
+    @node_tree = @node.hash_tree
   end
 
   # GET /nodes/new

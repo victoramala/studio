@@ -1,45 +1,81 @@
 .container
   .row
-    .col-md-6
-      p#notice= notice
-      p
-        strong Name:
-        = @node.name
-      p
-        strong Node type:
-        = @node.node_type
-      p
-        strong Description:
-        = @node.description
-      p
-        strong State:
-        = @node.state
-      = link_to 'Edit', edit_node_path(@node)
-      | \
-      = link_to 'Back', nodes_path
-    .col-md-6
-      - @node.assignments.each do |assignment|
-        .card style=("width: 18rem;")
-        .card-body
-          h5.card-title
-            span
-              ' Assigned To :
-              '
-              = assignment.user.name
-          h5.card-title
-            span
-              ' Task Status :
-              '
-              = assignment.status_display
-          h6.card-subtitle.mb-2.text-muted
-            span
-              ' Completition Date :
-              '
-              = assignment.completition_date.strftime("%d-%m-%Y")
-          p.card-text
-            span
-              ' Comments :
-              '
-              = assignment.description
-          /a.card-link href="#"  Card link
-          /a.card-link href="#"  Another link
+    - if @node.node_type == 'task'
+      .col-md-6
+          p#notice= notice
+          p
+            strong Name:
+            = @node.name
+          p
+            strong Node type:
+            = @node.node_type
+          p
+            strong Description:
+            = @node.description
+          p
+            strong State:
+            = @node.state
+          = link_to 'Edit', edit_node_path(@node)
+          | \
+          = link_to 'Back', nodes_path
+      .col-md-6
+        - @node.assignments.each do |assignment|
+          .card style=("width: 18rem;")
+          .card-body
+            h5.card-title
+              span
+                ' Assigned To :
+                '
+                = assignment.user.name
+            h5.card-title
+              span
+                ' Task Status :
+                '
+                = assignment.status_display
+            h6.card-subtitle.mb-2.text-muted
+              span
+                ' Completition Date :
+                '
+                = assignment.completition_date.strftime("%d-%m-%Y")
+            p.card-text
+              span
+                ' Comments :
+                '
+                = assignment.description
+            /a.card-link href="#"  Card link
+            /a.card-link href="#"  Another link
+
+    - else
+      .col-md-6
+        - if @node_tree
+          = nodes_tree_for @node_tree
+      .col-md-6
+        - @nodes_list = @node.leaves.where("node_type=?", "task").includes(:assignments)
+        
+        /= assignments.first.status
+        - @nodes_list.each do |node|
+          - if node.assignments
+            - node.assignments.each do |assignment|
+              - if assignment
+                  .card style=("width: 18rem;")
+                  .card-body
+                    h5.card-title
+                      span
+                        ' Assigned To :
+                        '
+                        = assignment.user.name if assignment
+                    h5.card-title
+                      span
+                        ' Task Status :
+                        '
+                        = assignment.status_display
+                    h6.card-subtitle.mb-2.text-muted
+                      span
+                        ' Completition Date :
+                        '
+                        = assignment.completition_date.strftime("%d-%m-%Y")
+                    p.card-text
+                      span
+                        ' Comments :
+                        '
+                        = assignment.description

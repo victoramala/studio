@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   def index
     @accounts = current_user.accounts
+    @account = current_user.accounts.first
     @assignments = current_user.assignments
     @all_assigns = Assignment.all
   end
