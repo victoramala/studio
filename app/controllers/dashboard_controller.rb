@@ -3,7 +3,7 @@ class DashboardController < ApplicationController
     @accounts = current_user.accounts
     @account = current_user.accounts.first
     @assignments = current_user.assignments
-    @all_assigns = Assignment.all
+    @all_assigns = @assignments
   end
 
   # def account
