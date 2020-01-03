@@ -1,4 +1,124 @@
-.container
+/= render "nodes/task_node_creation_modal"
+- if @node.parent_id.nil?
+  ol.breadcrumb(style="background-color:white;")
+    li.breadcrumb-item 
+      = link_to "Workspace", account_my_workspace_path(current_user.accounts.first)
+      /= link_to "My " node_path(@node.root.id)
+        = @node.root.name
+    li.breadcrumb-item.active aria-current="page" 
+      = @node.name
+  section#create-a-post.sce-content
+    .container
+      .row
+        .col-md-6
+          strong Episodes
+        .col-md-6
+          div(style="margin-left:60%;")
+            - epi_nodes = Node.where(parent_id: @node.id, node_type: "episodes")
+            = link_to "Create Episodes", episode_form_path(epi_nodes.first.id), style: "font-size:14px;font-weight:1000 !important", class: "btn btn-default"
+      .row
+        .col-md-12
+          .cp-wrapper
+            ul.cp-section-list
+              - episodes = Node.where("node_type = ?", "episode")
+              - episodes.each do |epi|
+                - if epi.root.id == @node.id
+                  li.cp-card-outer
+                    .cp-card
+                      .cp-card-preview-image-outer
+                        img.img-responsive.center-block alt=("humminglive-logo") src="/assets/images.png" /
+                      .cp-card-details
+                        .cp-card-text style=("overflow: set !important; ") 
+                          = link_to node_path(epi)
+                            h4.cp-card-title(style="text-align:center") = epi.name
+                          /! <h5 class="cp-card-sub-title">New entity</h5
+                          /= node.root.description
+                          /! <p class="cp-card-description">Showcasing technology, market focus and application</p
+                        /!
+                          | | <div class="cp-card-context"
+                          | | <div class="cp-card-context-label"><span>Cost Range: &amp;#8377; 60,000 - &amp;#8377 90,000</span></div
+                          | | </div
+- elsif @node.node_type == "episode"
+  ol.breadcrumb(style="background-color:white;")
+    li.breadcrumb-item 
+      = link_to "Workspace", account_my_workspace_path(current_user.accounts.first)
+    li.breadcrumb-item 
+      = link_to node_path(@node.root.id)
+        = @node.root.name
+    li.breadcrumb-item.active aria-current="page" 
+      = @node.name
+  
+  - @nodes = Node.where(parent_id: @node.id, node_type: "category")
+  - @nodes.each do |node|
+    div.panel.panel-default(style="margin-left:0px;padding:10px;background-color:#edf0ed")
+      .row
+        .col-md-6
+          = node.name
+        .col-md-6
+          /= link_to '#',  class: 'new_task_btn', style: "margin-left:75%",  node_id: node.id do
+            ' Add Task 
+          = link_to "Add Tasks", task_form_path(node.id), style: "margin-left:75%;"
+    .container(style="")
+      div(style="width:93%;margin-left:60px;")
+        - if node.leaves
+          table.table.table-bordered
+            thead-light
+              tr
+                th scope="col"  Task
+                th scope="col"  Assigned to
+                th scope="col"  Status
+                th scope="col"  Start Date
+                th scope="col"  End date
+                th
+                th
+            tbody
+              - node.children.each do |child|
+                - if child.assignments
+                  - child.assignments.each do |assign|
+                    - if assign.status == 'a'
+                      tr(style="background-color:green;color:white")
+                        td = child.name
+                        td = assign.user.name
+                        td = assign.status_display
+                        td = assign.start_date
+                        td = assign.end_date
+                        td 
+                        td = link_to "Show", assignment_path(assign), style: "color: white;"
+                    -elsif assign.status == 'p'
+                      tr(style="background-color:#ffd712;color:#000")
+                        td = child.name
+                        td = assign.user.name
+                        td = assign.status_display
+                        td = assign.start_date
+                        td = assign.end_date
+                        td = link_to "Approve", assignment_task_review_path(assignment_id: assign.id, status: "approve")
+                        td = link_to "Show", assignment_path(assign), style: "color: #000;"
+                    - else
+                      tr(style="")
+                        td = child.name
+                        td = assign.user.name
+                        td = assign.status_display
+                        td = assign.start_date
+                        td = assign.end_date
+                        td = link_to "Approve", assignment_task_review_path(assignment_id: assign.id, status: "approve")
+                        td = link_to "Show", assignment_path(assign), style: "color: #000;"
+                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/.container
   .row
     - if @node.node_type == 'task'
       .col-md-6
@@ -88,3 +208,17 @@
                               span
                                 strong Task :  
                                 = assignment.node.name
+//javascript:
+  //$(function(){
+    //$('.new_task_btn').click(function(){
+      //alert("fldkjgf");
+      //$('.new_user_block').find('.user_block_suspended_upto').show()
+      //var reportable_id = $(this).attr('reportable_id')
+      //var reportable_type = $(this).attr('reportable_type')
+      
+      //$.get('task_node_creation', {}, function(data){
+       // $('#taskNodeModal').modal('show');
+        //$('#taskNodeModal .rbody').html(data)
+      //})
+    //})
+  //});

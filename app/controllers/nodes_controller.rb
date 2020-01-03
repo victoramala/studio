@@ -9,6 +9,68 @@ class NodesController < ApplicationController
     # render :json => @nodes
   end
 
+  def episode_form
+    if params[:parent_id]
+      @parent_node = Node.find(params[:parent_id])
+      @parent_node_type = @parent_node.node_type
+      if @parent_node_type == 'episodes'
+        @node_type = 'episode'
+      end
+    end
+    @node = Node.new(parent_id: params[:parent_id], node_type: @node_type)
+    @assignments = @node.assignments.build
+  end
+
+  def create_episode_form
+    @node = Node.new(node_params)
+
+    respond_to do |format|
+      if @node.save
+          @pre_production = Node.create(name: 'Pre Production', node_type: "category", account_id: @node.account.id, state: "a", parent: @node)
+          @production = Node.create(name: 'Production', node_type: "category", account_id: @node.account.id, state: "a", parent: @node)
+          @pre_production.save!
+          @production.save!
+          format.html { redirect_to node_path(@node), notice: 'Node was successfully created.' }
+          format.json { render :show, status: :created, location: @node }
+      else
+        format.html { render :new }
+        format.json { render json: @node.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def task_form
+    if params[:parent_id]
+      @parent_node = Node.find(params[:parent_id])
+      @parent_node_type = @parent_node.node_type
+      if @parent_node_type == 'category'
+        @node_type = 'task'
+      end
+    end
+    @node = Node.new(parent_id: params[:parent_id], node_type: @node_type)
+    @assignments = @node.assignments.build
+    @shot_files = @node.shot_files.build
+  end
+
+  def create_task_form
+    @node = Node.new(node_params)
+
+    respond_to do |format|
+      if @node.save
+          format.html { redirect_to node_path(@node.parent.parent.id), notice: 'Node was successfully created.' }
+          format.json { render :show, status: :created, location: @node }
+      else
+        format.html { render :new }
+        format.json { render json: @node.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def user_info
+    @user = User.find(params[:user_id])
+
+    render "/nodes/_user_info", layout: false
+  end
   # GET /nodes/1
   # GET /nodes/1.json
   def show
@@ -55,6 +117,7 @@ class NodesController < ApplicationController
 
     respond_to do |format|
       if @node.save
+        @episodes = Node.create(name: "episodes", node_type: "episodes", account_id: @node.account.id, state: "a", parent: @node)
         if @node.node_type == 'series'
           format.html { redirect_to account_my_workspace_path(@node.account), notice: 'Node was successfully created.' }
           format.json { render :show, status: :created, location: @node }
@@ -82,7 +145,11 @@ class NodesController < ApplicationController
       end
     end
   end
+  
 
+  def task_node_creation
+
+  end
   # DELETE /nodes/1
   # DELETE /nodes/1.json
   def destroy

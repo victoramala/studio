@@ -1,0 +1,21 @@
+.container(style="padding:20px;background-color:grey;color:#FFF;width:100%")
+  .row
+    .col-md-6
+      | User Name
+    .col-md-6
+      strong = @user.name
+  .row
+    .col-md-6
+      | Total Task
+    .col-md-6
+      strong = @user.assignments.where(status: "p").count
+  .row
+    .col-md-6
+      | Current Task
+    .col-md-6
+      strong = @user.assignments.where(status: "p").count
+  .row
+    .col-md-6
+      | Approved Task
+    .col-md-6
+      strong = @user.assignments.where(status: "a").count

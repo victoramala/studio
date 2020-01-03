@@ -1,0 +1,19 @@
+#taskNodeModal.modal.fade.dashboard-invite-friend aria-hidden="true" aria-labelledby="taskNodeModal" role="dialog" tabindex="-1" 
+  .modal-dialog.modal-md(style="width:460px")
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+        h4.modal-title.text-center
+          i.sprite.sprite-invite_a_friend
+          ' &nbsp;
+          ' Block / Suspend User
+      .modal-body
+        .space-bottom
+        .row
+          .col-md-12
+            .rbody
+              /- if !@user_block.blank? 
+                = render 'admin/report_abuses/_form'
+javascript:
+  $(function(){
+  });

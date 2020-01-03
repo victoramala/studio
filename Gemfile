@@ -11,6 +11,8 @@ gem 'pg'
 
 gem 'simple_form'
 
+gem 'paperclip'
+
 gem 'slim-rails'
 
 gem "nested_form"

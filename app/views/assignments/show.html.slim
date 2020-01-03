@@ -1,7 +1,24 @@
-.container(style="margin-top:100px;")
+ol.breadcrumb(style="background-color:white;")
+  li.breadcrumb-item 
+    = link_to "Workspace", account_my_workspace_path(current_user.accounts.first)
+  li.breadcrumb-item 
+    = link_to node_path(@assignment.node.root)
+      = @assignment.node.root.name
+  li.breadcrumb-item 
+    = link_to node_path(@assignment.node.parent.parent)
+      = @assignment.node.parent.parent.name
+  li.breadcrumb-item.active aria-current="page" 
+    = @assignment.node.name
+.container(style="margin-top:10px;")
   div.panel.panel-default(style="padding:10px;")
     .row
-      .col-md-6
+      .col-md-4
+        - @assignment.node.shot_files.each do |img|
+          = image_tag img.shot_image.url(:medium)
+          = link_to 'Download', img.shot_image(:original), download: "file_#{@assignment.node.name}"
+        p
+          = @assignment.description
+      .col-md-4
         p#notice = notice
         p
           strong Assigned To:
@@ -24,16 +41,16 @@
         p
           strong Completition date:
           = @assignment.completition_date
-        p
+        /p
           strong Description:
           = @assignment.description
-      .col-md-6
+      .col-md-4
         - if @assignment.status != "a"
-          .row
+          .row(style="margin-top:30px;")
               = link_to "Approve", assignment_task_review_path(@assignment, status: "approve"), class: "btn btn-default", style: "background-color: green;color:#fff"
               /=> link_to 'Edit', edit_assignment_path(@assignment)
               /'|
-          .row
+          .row(style="margin-top:20px;")
                = link_to "Review", assignment_task_review_path(@assignment, status: "revision"), class: "btn btn-default", style: "background-color: orange;color:#fff"
-  .col-md-1
+  /.col-md-1
       = link_to 'Back', node_path(@assignment.node.root.id), class: "btn btn-default"

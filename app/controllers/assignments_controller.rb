@@ -15,7 +15,7 @@ class AssignmentsController < ApplicationController
     elsif params[:status]=="revision"
       @assignment.update_attributes(status: "r")
     end
-    redirect_to node_path(@assignment.node.root.id)
+    redirect_to node_path(@assignment.node.parent.parent.id)
   end
   # GET /assignments/1
   # GET /assignments/1.json

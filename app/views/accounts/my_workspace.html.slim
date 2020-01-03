@@ -24,39 +24,39 @@
                           | <div class="cp-card-context"
                           | <div class="cp-card-context-label"><span>Cost Range: &amp;#8377; 60,000 - &amp;#8377 90,000</span></div
                           | </div
-
-div(style="margin-top:100px")
-div.panel.panel-default(style="margin-left:30px;width:95%;padding:5px;")
-  section#create-a-post.sce-content.create-a-post
-    .container
-      .row
-        .col-md-12
-          /p.tagline
-            span Relevant for:
-            | Creative Studios, Brand custodians, Entertainment and Experiences.
-          /p.tagline Our deep understanding of skills and capabilities enables efficient building of modular blocks of solutions
-          h2 WorkSpace
-      .row
-        .col-md-12
-          .cp-wrapper
-            ul.cp-section-list
-              - @nodes.each do |node|
-                li.cp-card-outer
-                  .cp-card
-                    .cp-card-preview-image-outer
-                      img.img-responsive.center-block alt=("post thumb image") src="/assets/entertainment-fiction.jpg" /
-                    .cp-card-details
-                      .cp-card-text style=("overflow: set !important") 
-                        = link_to node_path(node)
-                          h4.cp-card-title = node.root.name
-                        /! <h5 class="cp-card-sub-title">New entity</h5
-                        = node.root.description
-                        /! <p class="cp-card-description">Showcasing technology, market focus and application</p
-                      /!
-                        | | <div class="cp-card-context"
-                        | | <div class="cp-card-context-label"><span>Cost Range: &amp;#8377; 60,000 - &amp;#8377 90,000</span></div
-                        | | </div
-.row
+ol.breadcrumb
+    li.breadcrumb-item.active aria-current="page" 
+      | My Workspace
+//div.panel.panel-default(style="margin-left:30px;width:95%;padding:5px;")
+section#create-a-post.sce-content
+  .container
+    .row
+      .col-md-6
+        strong WorkSpace
+      .col-md-6
+        div(style="margin-left:60%;")
+          = link_to "Create Project", new_node_path, style: "font-size:14px;font-weight:1000 !important", class: "btn btn-default"
+    .row
+      .col-md-12
+        .cp-wrapper
+          ul.cp-section-list
+            - @nodes.each do |node|
+              li.cp-card-outer
+                .cp-card
+                  .cp-card-preview-image-outer
+                    img.img-responsive.center-block alt=("post thumb image") src="/assets/humming-live-logo.jpg" /
+                  .cp-card-details
+                    .cp-card-text style=("overflow: set !important") 
+                      = link_to node_path(node)
+                        h4.cp-card-title = node.root.name
+                      /! <h5 class="cp-card-sub-title">New entity</h5
+                      = node.root.description.truncate(30)
+                      /! <p class="cp-card-description">Showcasing technology, market focus and application</p
+                    /!
+                      | | <div class="cp-card-context"
+                      | | <div class="cp-card-context-label"><span>Cost Range: &amp;#8377; 60,000 - &amp;#8377 90,000</span></div
+                      | | </div
+/.row
   .col-md-12
     .create-post-btn style=("margin-top:0px !important")
       .cp-button.Create-a-Post data-target="/app/nodes/new"
