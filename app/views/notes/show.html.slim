@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Notes subject:
+  = @note.notes_subject
+p
+  strong User:
+  = @note.user_id
+p
+  strong Assignment:
+  = @note.assignment_id
+p
+  strong Account:
+  = @note.account_id
+
+=> link_to 'Edit', edit_note_path(@note)
+'|
+=< link_to 'Back', notes_path

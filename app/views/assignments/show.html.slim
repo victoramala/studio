@@ -63,3 +63,13 @@
                   /'|
   /.col-md-1
       = link_to 'Back', node_path(@assignment.node.root.id), class: "btn btn-default"
+section.section.comments
+  .container
+    h3.subtitle.is-3 Notes
+    /strong = @assignment.notes.count
+      | Notes
+    - unless @assignment.notes.blank?
+      div.panel.panel-default(style="padding:10px;")
+        = render @assignment.notes 
+    div.comment-form
+    = render 'notes/form'

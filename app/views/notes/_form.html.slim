@@ -1,0 +1,21 @@
+/= simple_form_for(@note) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :notes_subject
+    = f.input :user_id
+    = f.input :assignment_id
+    = f.input :account_id
+
+  .form-actions
+    = f.button :submit
+
+
+= simple_form_for([@assignment, @assignment.notes.build]) do |f|
+  - if f.object.id.nil?
+    .form-group
+      = f.input :notes_subject, input_html: {class: "form-control"}, label: false
+      = f.input :user_id, input_html: { value: current_user.id },  :as => :hidden
+      = f.input :account_id, input_html: { value: current_user.accounts.last.id },  :as => :hidden
+    = f.button :submit, 'Submit', class: "button is-primary"

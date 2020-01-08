@@ -29,6 +29,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
+    # @notes = @assignment.notes.build
   end
 
   # GET /assignments/new

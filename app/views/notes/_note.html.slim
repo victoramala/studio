@@ -1,0 +1,15 @@
+
+.box
+  article.media
+    .media-content
+      .content
+        p
+          .row
+            .col-md-2.col-xs-6
+              strong = note.user.name
+            .col-md-8.col-xs-6
+              = note.notes_subject
+            .col-md-2.col-xs-6
+              - if current_user == note.user
+                = link_to 'Delete', [note.assignment, note], method: :delete, class: "button btn btn-danger", data: { confirm: 'Are you sure?' }
+hr

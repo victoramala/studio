@@ -80,6 +80,9 @@
       .col-md-2
         div.panel.panel-default.ap(style="padding:10px;width:115%;text-align:center")
           = link_to "Approval Pending", "#", class: "awaiting-task-btn", style: "padding:10px;"
+      .col-md-2
+        div.panel.panel-default.rt(style="padding:10px;width:115%;text-align:center")
+          = link_to "Revision", "#", class: "reviewed-task-btn", style: "padding:10px;"
     .row
       .col-md-12
         #current_task style="display:none"
@@ -99,26 +102,43 @@ javascript:
       $(this).parent().css('background-color', '#e3dddc');
       $('.ap').css('background-color', '#fff');
       $('.at').css('background-color', '#fff');
+      $('.rt').css('background-color', '#fff');
       $("#current_task").show();
       $("#approved_task").hide();
       $("#awaiting_task").hide();
+      $("#revised_task").hide();
     })
     $('.approved-task-btn').click(function(e){
       e.preventDefault();
       $(this).parent().css('background-color', '#e3dddc');
       $('.ct').css('background-color', '#fff');
       $('.ap').css('background-color', '#fff');
+      $('.rt').css('background-color', '#fff');
       $("#approved_task").show();
       $("#current_task").hide();
       $("#awaiting_task").hide();
+      $("#revised_task").hide();
     })
     $('.awaiting-task-btn').click(function(e){
       e.preventDefault();
       $(this).parent().css('background-color', '#e3dddc');
       $('.ct').css('background-color', '#fff');
       $('.at').css('background-color', '#fff');
+      $('.rt').css('background-color', '#fff');
       $("#awaiting_task").show();
       $("#current_task").hide();
       $("#approved_task").hide();
+      $("#revised_task").hide();
+    })
+    $('.reviewed-task-btn').click(function(e){
+      e.preventDefault();
+      $(this).parent().css('background-color', '#e3dddc');
+      $('.ct').css('background-color', '#fff');
+      $('.at').css('background-color', '#fff');
+      $('.ap').css('background-color', '#fff');
+      $("#awaiting_task").hide();
+      $("#current_task").hide();
+      $("#approved_task").hide();
+      $("#revised_task").show();
     })
   })
