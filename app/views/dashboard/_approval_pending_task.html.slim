@@ -1,0 +1,15 @@
+table.table.table-bordered
+  thead-light
+    tr
+      th scope="col"  Task
+      th scope="col"  Start Date
+      th scope="col"  End date
+      th
+  tbody
+    - @approval_pending.each do |a|
+      - if a
+        tr
+          td = a.node.name
+          td = a.start_date
+          td = a.end_date
+          td = link_to "Show", assignment_path(a), style: ""

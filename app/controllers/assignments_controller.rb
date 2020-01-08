@@ -10,12 +10,21 @@ class AssignmentsController < ApplicationController
   
   def task_review
     @assignment = Assignment.find(params[:assignment_id])
-    if params[:status]=="approve"
-      @assignment.update_attributes(status: "a")
-    elsif params[:status]=="revision"
-      @assignment.update_attributes(status: "r")
+    if current_user.user_role == "admin"
+      if params[:status]=="approve"
+        @assignment.update_attributes(status: "a")
+      elsif params[:status]=="revision"
+        @assignment.update_attributes(status: "r")
+       elsif params[:status]=="submission"
+        @assignment.update_attributes(status: "wa")
+      end
+      redirect_to node_path(@assignment.node.parent.parent.id)
+    else
+      if params[:status]=="submission"
+        @assignment.update_attributes(status: "wa")
+      end
+      redirect_to assignment_path(@assignment)
     end
-    redirect_to node_path(@assignment.node.parent.parent.id)
   end
   # GET /assignments/1
   # GET /assignments/1.json

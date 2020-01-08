@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     root to: "home#index"
   end
   resources :dashboard do
+    get 'current_task', on: :collection
     # get 'account', on: :collection
     # post 'create_account', on: :collection
   end

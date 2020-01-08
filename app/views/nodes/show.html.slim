@@ -93,8 +93,8 @@
                         td = assign.end_date
                         td = link_to "Approve", assignment_task_review_path(assignment_id: assign.id, status: "approve")
                         td = link_to "Show", assignment_path(assign), style: "color: #000;"
-                    - else
-                      tr(style="")
+                    - elsif assign.status == 'wa'
+                      tr(style="background-color:#ff8c08;")
                         td = child.name
                         td = assign.user.name
                         td = assign.status_display

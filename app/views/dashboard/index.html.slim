@@ -1,69 +1,124 @@
-.container(style="margin-top:80px")
-  .row
-    .col-md-4
-      div.panel.panel-default(style="width:100%";padding:5px;)
-        div(style="padding:20px;")
-          .row
-            .col-md-6
-              h4 Projects list
-            /.col-md-5
-              H3 = link_to "+ New Account", new_user_path
-          hr
-          - if @account
-            - @account.nodes.where("parent_id IS ?", nil).each do |node|
-              = link_to node_path(node)
-                = node.root.name
-                hr
-    .col-md-8
-      div.panel.panel-default(style="width:100%";padding:10px;)
-        div(style="padding:20px;")
-          .row
-            .col-md-6
-              h4 My Tasks list
-            /.col-md-5
-              H3 = link_to "+ New Account", new_user_path
-          hr
-          - @assignments.each do |a|
-            - unless a.nil?
-              .row
-                .col-md-3
-                  = link_to assignment_path(a)
-                    = a.node.name
-                .col-md-2
-                  = a.status_display
-                /.col-md-2
-                  = a.user.name
-                .col-md-3
-                  = a.start_date
-                .col-md-3
-                  = a.end_date
-              hr
-  if current_user.role == "admin"
+- if current_user.user_role == "admin"
+  .container(style="margin-top:80px")
     .row
-      .col-md-12
+      .col-md-4
+        div.panel.panel-default(style="width:100%";padding:5px;)
+          div(style="padding:20px;")
+            .row
+              .col-md-6
+                h4 Projects list
+              /.col-md-5
+                H3 = link_to "+ New Account", new_user_path
+            hr
+            - if @account
+              - @account.nodes.where("parent_id IS ?", nil).each do |node|
+                = link_to node_path(node)
+                  = node.root.name
+                  hr
+      .col-md-8
         div.panel.panel-default(style="width:100%";padding:10px;)
           div(style="padding:20px;")
             .row
-              .col-md-9
-                h4 All Tasks list
-              - if @all_assigns.count > 5
-                .col-md-3
-                  h4 = link_to "All Assignments", assignments_path
+              .col-md-6
+                h4 My Tasks list
+              /.col-md-5
+                H3 = link_to "+ New Account", new_user_path
             hr
-            - @all_assigns.limit(5).each do |a|
+            - @assignments.each do |a|
               - unless a.nil?
                 .row
-                  .col-md-2
+                  .col-md-3
                     = link_to assignment_path(a)
                       = a.node.name
                   .col-md-2
-                    = a.node.root.name
-                  .col-md-2
                     = a.status_display
-                  .col-md-2
+                  /.col-md-2
                     = a.user.name
-                  .col-md-2
+                  .col-md-3
                     = a.start_date
-                  .col-md-2
+                  .col-md-3
                     = a.end_date
                 hr
+    if current_user.role == "admin"
+      .row
+        .col-md-12
+          div.panel.panel-default(style="width:100%";padding:10px;)
+            div(style="padding:20px;")
+              .row
+                .col-md-9
+                  h4 All Tasks list
+                - if @all_assigns.count > 5
+                  .col-md-3
+                    h4 = link_to "All Assignments", assignments_path
+              hr
+              - @all_assigns.limit(5).each do |a|
+                - unless a.nil?
+                  .row
+                    .col-md-2
+                      = link_to assignment_path(a)
+                        = a.node.name
+                    .col-md-2
+                      = a.node.root.name
+                    .col-md-2
+                      = a.status_display
+                    .col-md-2
+                      = a.user.name
+                    .col-md-2
+                      = a.start_date
+                    .col-md-2
+                      = a.end_date
+                  hr
+- else
+  .container
+    .row(style="margin-top:50px;")
+      .col-md-2
+        div.panel.panel-default.ct(style="padding:10px;width:115%;text-align:center")
+          = link_to "Current Task", "#", class: "current-task-btn", style: "padding:10px;"
+      .col-md-2
+        div.panel.panel-default.at(style="padding:10px;width:115%;text-align:center")
+          = link_to "Approved Task", "#", class: "approved-task-btn", style: "padding:10px;"
+      .col-md-2
+        div.panel.panel-default.ap(style="padding:10px;width:115%;text-align:center")
+          = link_to "Approval Pending", "#", class: "awaiting-task-btn", style: "padding:10px;"
+    .row
+      .col-md-12
+        #current_task style="display:none"
+          = render "current_task"
+        #approved_task style="display:none"
+          = render "approved_task"
+        #revised_task style="display:none"
+          = render "revised_task"
+        #awaiting_task style="display:none"
+          = render "approval_pending_task"
+javascript:
+  $(function(){
+    $("#current_task").show();
+    $('.ct').css('background-color', '#e3dddc');
+    $('.current-task-btn').click(function(e){
+      e.preventDefault();
+      $(this).parent().css('background-color', '#e3dddc');
+      $('.ap').css('background-color', '#fff');
+      $('.at').css('background-color', '#fff');
+      $("#current_task").show();
+      $("#approved_task").hide();
+      $("#awaiting_task").hide();
+    })
+    $('.approved-task-btn').click(function(e){
+      e.preventDefault();
+      $(this).parent().css('background-color', '#e3dddc');
+      $('.ct').css('background-color', '#fff');
+      $('.ap').css('background-color', '#fff');
+      $("#approved_task").show();
+      $("#current_task").hide();
+      $("#awaiting_task").hide();
+    })
+    $('.awaiting-task-btn').click(function(e){
+      e.preventDefault();
+      $(this).parent().css('background-color', '#e3dddc');
+      $('.ct').css('background-color', '#fff');
+      $('.at').css('background-color', '#fff');
+      $("#awaiting_task").show();
+      $("#current_task").hide();
+      $("#approved_task").hide();
+    })
+  })

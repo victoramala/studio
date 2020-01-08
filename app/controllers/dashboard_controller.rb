@@ -4,6 +4,10 @@ class DashboardController < ApplicationController
     @account = current_user.accounts.first
     @assignments = current_user.assignments
     @all_assigns = @assignments
+    @current_tasks = current_user.assignments.where(status: "p")
+    @approved_tasks = current_user.assignments.where(status: "a")
+    @revised_tasks = current_user.assignments.where(status: "r")
+    @approval_pending = current_user.assignments.where(status: "wa")
   end
 
   # def account
