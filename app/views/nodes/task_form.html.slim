@@ -42,7 +42,7 @@ ol.breadcrumb(style="background-color:white;")
                   .col-md-2
                     strong Assign To
                   .col-md-8
-                    =a.association :user, collection: current_user.accounts.first.users.all.order(:name), label: false, placeholder: '', input_html: {class: "form-control"}
+                    =a.association :user, collection: current_user.accounts.first.users.map {|a| ["#{a.name}      WIP - #{a.assignments.where("status = ? OR status = ?", "p", "r").count}", a.id]}, label: false, placeholder: '', input_html: {class: "form-control"}
               .form-group
                 .row
                   .col-md-2

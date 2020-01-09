@@ -69,7 +69,7 @@ section.section.comments
     /strong = @assignment.notes.count
       | Notes
     - unless @assignment.notes.blank?
-      div.panel.panel-default(style="padding:10px;")
+      div.panel.panel-default(style="padding:10px;overflow-y: scroll;float:left;height: 450px;width:100%")
         = render @assignment.notes 
     div.comment-form
-    = render 'notes/form'
+      = render 'notes/form'

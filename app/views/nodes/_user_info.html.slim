@@ -6,16 +6,16 @@
       strong = @user.name
   .row
     .col-md-6
-      | Total Task
-    .col-md-6
-      strong = @user.assignments.where(status: "p").count
-  .row
-    .col-md-6
       | Current Task
     .col-md-6
       strong = @user.assignments.where(status: "p").count
   .row
     .col-md-6
-      | Approved Task
+      | Revision Task
     .col-md-6
-      strong = @user.assignments.where(status: "a").count
+      strong = @user.assignments.where(status: "r").count
+  .row
+    .col-md-6
+      | Approval Pending Task
+    .col-md-6
+      strong = @user.assignments.where(status: "wa").count
