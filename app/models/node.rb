@@ -6,17 +6,4 @@ class Node < ApplicationRecord
   has_many :shot_files
   accepts_nested_attributes_for :assignments
   accepts_nested_attributes_for :shot_files
-  # def all_assignments
-  # 	all_assignments = []
-  # 	puts ""
-  # 	nodes= self.leaves.where("node_type = ?", 'task')
-  # 	puts "+++++++++++++++++++++"
-  # 	puts nodes.to_json
-  # 	nodes.each do |node|
-  #  	  all_assignments << node.assignments
-  #   end
-  #   puts "++++++++++++++++++++++++"
-  #   puts all_assignments.to_json
-  #   return all_assignments
-  # end
 end
