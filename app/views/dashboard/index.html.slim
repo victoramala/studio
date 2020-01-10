@@ -39,7 +39,9 @@
                   .col-md-3
                     = a.end_date
                 hr
-    if current_user.role == "admin"
+    /- @acc_tasks.each do |a|
+      = a.user
+    /if current_user.role == "admin"
       .row
         .col-md-12
           div.panel.panel-default(style="width:100%";padding:10px;)
@@ -47,11 +49,11 @@
               .row
                 .col-md-9
                   h4 All Tasks list
-                - if @all_assigns.count > 5
+                - if @acc_tasks.count > 5
                   .col-md-3
                     h4 = link_to "All Assignments", assignments_path
               hr
-              - @all_assigns.limit(5).each do |a|
+              - @acc_tasks.limit(5).each do |a|
                 - unless a.nil?
                   .row
                     .col-md-2
